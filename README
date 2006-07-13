@@ -1,0 +1,14 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1606
+
+" This script searches vimhelp for paragraphs containing
+" given words (substrings), in any order, and non-adjacent.
+" Scripts defines commandHELPWORDS and it's synonym, HW.
+"              Usage: HW word1 word2 ...
+" This command will search vimhelp for paragraphs
+" containing all given words, in any order (and non-adjacent).
+" To proceed to the next match, us :cn command.
+"
+" Example: HW normal count
+" will find all paragraphs that talk about normal-mode counters.
+"
+
