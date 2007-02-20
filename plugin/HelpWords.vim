@@ -1,6 +1,6 @@
 " File:         HelpWords.vim
 " Author:       Yakov Lerner <iler.ml@gmail.com>
-" Last changed: 2006-07-13
+" Last changed: 2006-12-21
 "
 " This script searches vimhelp for paragraphs containing 
 " given words (substrings), in any order, and non-adjacent.
@@ -17,7 +17,7 @@
 " 1.0: First revision
 "
 
-if exists("g:g:helpwords_plugin") | finish | endif
+if exists("g:helpwords_plugin") | finish | endif
 let g:helpwords_plugin = 1
 
 
@@ -47,7 +47,20 @@ fun! HelpWords(...)
    endif
    " let @/ = re
    redraw
-   echo ": helpgrep ".re
-   exe "helpgrep ".re
+
+   " regexp of :helpgrep does not modify @/
+   " if we want to debug HELPWORDS, we want o leave
+   " regexp used in global var
+   let g:helpwords_re=re
+   let g:helpwords_argc=a:0
+   let g:helpwords_cmd="helpgrep " . re
+   "echo "argc=".a:0
+
+   echo ": helpgrep " . re
+   exe "helpgrep " . re
 endfun
 
+" as of july 2006 (vim7.0.039) <f-args> treats backslashes incorrectly
+" If we want to 'HELPWORDS \\ windows' and we expect HELPWORDS to get
+" 2 argument, it does not. HELPWORDS gets 1 argument, this is incorrect
+" and labeled in todo.txt for repair
